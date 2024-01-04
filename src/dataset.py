@@ -4,6 +4,7 @@ from torchvision import transforms
 import os
 from PIL import Image
 import re
+import numpy as np
 
 class FocusStackingDataset(Dataset):
     """
@@ -53,8 +54,9 @@ class FocusStackingDataset(Dataset):
     def __getitem__(self, idx):
         batch_nr, image_paths, label_path = self.samples[idx]
         
-        # Load images and label
-        images = [Image.open(path) for path in image_paths]
+        # convert("L") - bc. they save it as RGB but it's just grayscale, every channel has same values
+        images = [Image.open(path).convert("L") for path in image_paths]
+
         label = Image.open(label_path)
         
         # Apply transformations
@@ -83,6 +85,9 @@ def test():
 
         assert len(images) == 4
         assert len(label) == 1
+
+        assert images[0].shape == torch.Size([1, 1, 512, 512])
+        assert label.shape == torch.Size([1, 1, 512, 512])
 
         assert type(images) == list
         assert type(images[0]) == torch.Tensor

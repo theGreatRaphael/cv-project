@@ -2,7 +2,7 @@
 
 """ Full assembly of the parts to form the complete network """
 
-from .unet_parts import *
+from unet_parts import *
 
 
 class UNet(nn.Module):

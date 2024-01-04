@@ -1,0 +1,7 @@
+model:
+  num_input_images: 4
+
+training:
+  batch_size: 2
+  epochs: 100
+  learning_rate: 0.001
