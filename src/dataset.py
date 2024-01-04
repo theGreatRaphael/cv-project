@@ -43,9 +43,8 @@ class FocusStackingDataset(Dataset):
 
         # Sort the images by the filename which implicitly sorts by the focal plane due to naming convention
         for key in samples:
-            samples[key]['images'].sort()
+            samples[key]['images'].sort(key=lambda x: float(re.search(r'integral_(\d+(\.\d+)?)', x).group(1)))
 
-        # Convert dict to list of tuples and filter out incomplete samples
         return [(k, v['images'], v['label']) for k, v in samples.items() if len(v['images']) == 4 and v['label']]
 
     def __len__(self):
