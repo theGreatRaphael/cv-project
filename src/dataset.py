@@ -1,3 +1,4 @@
+import torch
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 import os
@@ -64,25 +65,37 @@ class FocusStackingDataset(Dataset):
 
         return images, label
 
-# Example usage:
-# Set the directory where the images are stored
-root_dir = 'path/to/image/folder'
 
-# Define the transformations
-transform = transforms.Compose([
-    transforms.ToTensor(),  # Convert images to PyTorch tensors
-    # Add any other transformations you need
-])
 
-# Create the dataset
-dataset = FocusStackingDataset(root_dir=root_dir, transform=transform)
+def test():
+    root_dir = './data/batch_20230912_part1'
 
-# Create a DataLoader
-dataloader = DataLoader(dataset, batch_size=1, shuffle=True)
+    transform = transforms.Compose([
+        # TODO: maybe increased contrast would rock?!
+        transforms.ToTensor(),  # Convert images to PyTorch tensors
+        # Add any other transformations you need
+    ])
 
-# Iterate through the data
-for images, label in dataloader:
-    # images is a list of 4 tensors
-    # label is a tensor
-    # Do something with the images and label...
-    pass  # Replace with your code to handle the batch
+    dataset = FocusStackingDataset(root_dir=root_dir, transform=transform)
+    dataloader = DataLoader(dataset, batch_size=1, shuffle=True)
+
+    for idx, (images, label) in enumerate(dataloader):
+        if idx > 5:
+            break
+
+        assert len(images) == 4
+        assert len(label) == 1
+
+        assert type(images) == list
+        assert type(images[0]) == torch.Tensor
+        assert type(label) == torch.Tensor
+
+    print("Dataloader is working")
+    
+
+if __name__ == "__main__":
+    test()
+
+
+
+
