@@ -9,7 +9,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 Before you begin, ensure you have the following installed:
-- Python 3.7 or higher
+- Python 3.10 (higher isn't possible since pytorch doesn't support it)
 - [Poetry](https://python-poetry.org/docs/#installation), a tool for dependency management and packaging in Python.
 
 ### Installing
