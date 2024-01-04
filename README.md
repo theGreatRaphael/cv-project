@@ -18,7 +18,7 @@ To set up the project environment and install the required dependencies, follow 
 
 1. **Clone the Repository**
 ```bash
-git clone https://your-repository-link.git
+git clone https://github.com/theGreatRaphael/cv-project.git
 cd focus-stacking-and-occlusion-removal
 ```
 

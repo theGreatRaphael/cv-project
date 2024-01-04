@@ -65,7 +65,6 @@ class FocusStackingDataset(Dataset):
         return images, label
 
 
-
 def test():
     root_dir = './data/batch_20230912_part1'
 
